@@ -58,7 +58,7 @@ The discrete FFT for vector f is given by:
 
 The verb dfft defined below implements the above expression, and matches the result of fftw. However, it is very inefficient for large arguments.
 )
-dfft=: 3 : '+/ y. * ^ (#y.) %~ (- o. 0j2 ) * */~ i.#y.'
+dfft=: 3 : '+/ y * ^ (#y) %~ (- o. 0j2 ) * */~ i.#y'
 
 dfft i.8
 
