@@ -1,0 +1,13 @@
+
+buildapp_jproject_ 1
+
+cocurrent 'base'
+
+load '~system\packages\fftw\fftw.ijs'
+
+DATA=: j./ (i.64) ,: (i.64) + _5 + ?. 64$10
+
+test0=: 3 : 0
+DATA=: j./ (i.8) ,: 0 1 1 2 2 2 3 3
+fftw DATA
+)

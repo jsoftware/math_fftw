@@ -1,0 +1,51 @@
+NB. project file: /home/chris/deb/addonsrc/math/fftw/fftw
+
+coclass 'jproject'
+
+PRIMARYFILES=: 0 : 0
+~Addons/math/fftw/init
+~Addons/math/fftw/util
+~Addons/math/fftw/main
+)
+
+PRIMARYLIBS=: 'dll'
+
+DEVFILES=: ''
+
+DEVLIBS=: 'files'
+
+OTHERFILES=: 0 : 0
+~Addons/math/fftw/demo.ijs
+~Addons/math/fftw/demo1.ijs
+~Addons/math/fftw/exam.ijs
+~Addons/math/fftw/exam1d.ijs
+~Addons/math/fftw/exam2d.ijs
+~Addons/math/fftw/fftw.ijt
+~Addons/math/fftw/mainold.ijs
+~Addons/math/fftw/manifest.ijs
+~Addons/math/fftw/readme.txt
+~Addons/math/fftw/test.ijs
+~Addons/math/fftw/testfftw.ijs
+)
+
+TARGETFILE=: '~Addons/math/fftw/fftw.ijs'
+
+TARGETLOCALE=: 'jfftw'
+
+TARGETHEADER=: ''
+
+TARGETEXTRA=: ''
+
+BUILDOPTS=: 0 1 0 0 0 0 0
+
+PREBUILDFILE=: ''
+
+POSTBUILDFILE=: ''
+
+TESTFILE=: ''
+
+NOTES=: ''
+
+VERSION=: ''
+
+WINDOWS=: ''
