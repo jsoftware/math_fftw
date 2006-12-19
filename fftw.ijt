@@ -10,7 +10,7 @@ FFTW is a comprehensive collection of fast C routines for computing the discrete
 
 FFTW was developed at MIT by Matteo Frigo and Steven G. Johnson, and a full description is available at the FFTW home page: http://theory.lcs.mit.edu/~fftw/
 
-FFTW is licensed under the GNU General Public License, see addons\fftw\gpl.htm.
+FFTW is licensed under the GNU General Public License, see addons/math/fftw/gpl.htm.
 )
 
 NB. =========================================================
@@ -22,10 +22,10 @@ These routines are accessible to J through the J DLL call mechanism as documente
 
 NB. =========================================================
 Lab Section
-The scripts and other files for FFTW are in subdirectory fftw
+The scripts and other files for FFTW are in subdirectory fftw/math
 of the addons directory, i.e.
 )
-jpath '~addons\fftw'
+jpath '~addons/math/fftw'
 
 NB. =========================================================
 Lab Section Loading FFTW
@@ -38,7 +38,7 @@ Two verbs are defined in the z locale:
    fftw     forward FFT
    ifftw    backward FFT
 )
-load jpath '~addons\fftw\fftw.ijs'
+load 'math/fftw'
 
 NB. =========================================================
 Lab Section Examples

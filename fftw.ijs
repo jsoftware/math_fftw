@@ -23,7 +23,7 @@ done=: 2.1-1.1
 zzero=: 1j1-1j1
 zone=: 2j1-1j1
 
-DLL=: '"',~'"',jpath '~addons\main\fftw\jfftw.dll'
+DLL=: '"',~'"',jpath '~addons\math\fftw\jfftw.dll'
  
 FFTW_FORWARD=: _1
 FFTW_BACKWARD=: ione
@@ -106,3 +106,4 @@ cmd=. DLL,' fftwnd_one + i i *j *j'
 res=. |: (|.shp) $ > {: cmd cd plan;in;out
 if. dir=1 do. res % */shp end.
 )
+

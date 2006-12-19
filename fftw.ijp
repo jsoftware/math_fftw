@@ -1,4 +1,4 @@
-NB. project file: /home/chris/deb/addonsrc/math/fftw/fftw
+NB. project file: e:/deb/addons/math/fftw/fftw
 
 coclass 'jproject'
 
@@ -21,7 +21,6 @@ OTHERFILES=: 0 : 0
 ~Addons/math/fftw/exam1d.ijs
 ~Addons/math/fftw/exam2d.ijs
 ~Addons/math/fftw/fftw.ijt
-~Addons/math/fftw/mainold.ijs
 ~Addons/math/fftw/manifest.ijs
 ~Addons/math/fftw/readme.txt
 ~Addons/math/fftw/test.ijs
@@ -40,7 +39,7 @@ BUILDOPTS=: 0 1 0 0 0 0 0
 
 PREBUILDFILE=: ''
 
-POSTBUILDFILE=: ''
+POSTBUILDFILE=: '~Addons/math/fftw/fftwsave.ijs'
 
 TESTFILE=: ''
 
