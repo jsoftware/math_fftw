@@ -10,7 +10,7 @@ FFTW is only available under Windows.
 
 VERSION=: '1.1.2'
 
-RELEASE=: 'j601'
+RELEASE=: 'j601 j602'
 
 LABCATEGORY=: 'Math'
 
