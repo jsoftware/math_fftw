@@ -1,5 +1,5 @@
 require 'plot numeric stats trig'
-require 'system\packages\fftw\fftw.ijs'
+load '~addons\math\fftw\fftw.ijs'
 
 t=: steps 0 0.1 200
 x=: (sin t*2p1*3) + sin t*2p1*5

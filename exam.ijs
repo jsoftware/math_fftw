@@ -1,4 +1,4 @@
-require 'system\packages\fftw\fftw.ijs'
+load '~addons\math\fftw\fftw.ijs'
 
 dfft=: 3 : '+/ y * ^ (#y) %~ (- o. 0j2 ) * */~ i.#y'
 times=: 0.125 * i.32

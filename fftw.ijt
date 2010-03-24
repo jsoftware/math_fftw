@@ -15,15 +15,14 @@ FFTW is licensed under the GNU General Public License, see addons/math/fftw/gpl.
 
 NB. =========================================================
 Lab Section Source Files
-The FFTW routines are packaged in file jfftw.dll, which includes the complete set of complex number routines in FFTW.
+The FFTW routines are packaged in file libfftw3-3.dll, which includes the complete set of complex number routines in FFTW.
 
 These routines are accessible to J through the J DLL call mechanism as documented in User Manual chapter "Dlls and Memory Management".
 )
 
 NB. =========================================================
 Lab Section
-The scripts and other files for FFTW are in subdirectory fftw/math
-of the addons directory, i.e.
+The scripts and other files for FFTW are in subdirectory math/fftw of the addons directory, i.e.
 )
 jpath '~addons/math/fftw'
 
@@ -57,12 +56,13 @@ The discrete FFT for vector f is given by:
             n=0
 
 The verb dfft defined below implements the above expression, and matches the result of fftw. However, it is very inefficient for large arguments.
+
+Note that we remove small rounding errors by using the verb clean from the numeric script.
 )
 dfft=: 3 : '+/ y * ^ (#y) %~ (- o. 0j2 ) * */~ i.#y'
 
-dfft i.8
-
-fftw i.8
+require 'numeric'
+clean (dfft - fftw) i.8
 
 NB. =========================================================
 Lab Section
@@ -86,9 +86,8 @@ Doing a FFT followed by an inverse FFT returns the original data, so that the fo
 
    dat - ifftw fftw dat
 
-In practice, there may be small rounding errors. You can remove these small values with the verb clean from the numeric script.
+In practice, there may be small rounding errors.  Again, we use clean to remove these.
 )
-require 'numeric'
 
 A=: ?.~ 8
 
@@ -138,31 +137,55 @@ The verbs fftw and ifftw dynamically create and destroy plans. If you are callin
 In the following example, a plan is created for a 2 3 4 array, and FFT is called twice using it:
 )
 shape=: 2 3 4
+data=: j./? 1+ i.2, shape                   NB. random data
 
-[P=: createplan_jfftw_ shape;_1;0         NB. create plan
+NB. get data in right shape for library call and allocate
+NB. space for output.
+in=: (,|:data)
+out=: in * 0
 
-fftwndone_jfftw_ P;_1;j./? 1+ i.2, shape  NB. random data
+[P=: createplan_jfftw_ shape;in;out;_1;64   NB. create plan
 
-fftwndone_jfftw_ P;_1;j./? 1+ i.2, shape  NB. random data
+NB. execute plan.  Result goes to out, which we must reshape
+fftwexecute_jfftw_ P
+|: (|.shape) $ out
 
-destroyplan_jfftw_ P                      NB. destroy plan
+data=: j./? 1+ i.2, shape                   NB. new random data
+
+in=: (,|:data) a: } in                      NB. in-place update of input
+data
+
+fftwexecute_jfftw_ P                        NB. reuse existing plan
+|: (|.shape) $ out
+
+destroyplan_jfftw_ P                        NB. destroy plan
 
 NB. =========================================================
 Lab Section Performance Measures
-The third argument to the verb createplan is a flag, 0=ESTIMATE or 1=MEASURE, where ESTIMATE is the default.
+The final argument to the verb createplan is a flag, 0=MEASURE or 64=ESTIMATE, where ESTIMATE is the default.
 
 Plans created with the MEASURE flag are optimized for a given array size. It takes much longer to create such plans than with ESTIMATE, and so you would do this only when a large number of FFTs are to be calculated for the same array shape.
 
-The next section creates a plan with a performance measure. It will take a few seconds to run, most of the time being spent creating the plan.
+When creating plans with the ESTIMATE flag you may set up the input either before or after creating the plan.  But when creating plans with the MEASURE flag, you must set up the input after creating the plan.
+
+The next section creates a plan with a performance measure. It will take a little longer to run, most of the time being spent creating the plan.
 )
 
 NB. =========================================================
 Lab Section
 )
 shape=: 2 3 4
+in=: (*/ shape) $ 1j1                       NB. input must hold complex
+values
+out=: in * 0
 
-P=: createplan_jfftw_ shape;_1;1
+[P=: createplan_jfftw_ shape;in;out;_1;0    NB. create plan
 
-fftwndone_jfftw_ P;_1;j./?.1+i.2, shape
+NB. populate input after creating plan.
+data=: j./? 1+ i.2, shape
+in=: (,|:data) a: } in
 
-destroyplan_jfftw_ P
+fftwexecute_jfftw_ P                        NB. execute plan
+|: (|.shape) $ out                          NB. result goes to out
+
+destroyplan_jfftw_ P                        NB. destroy plan

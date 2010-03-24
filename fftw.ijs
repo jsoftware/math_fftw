@@ -16,21 +16,22 @@ NB. clean         clean numbers near 0
 NB. info          cover for wdinfo
 NB. matchclean    if clean x-y is all 0
 
-izero=: 23-23
-ione=: 23-22
-dzero=: 1.1-1.1
-done=: 2.1-1.1
 zzero=: 1j1-1j1
-zone=: 2j1-1j1
 
-DLL=: '"',~'"',jpath '~addons\math\fftw\jfftw.dll'
- 
+3 : 0''
+if. IFUNIX do.
+  DLL=: 'libfftw3.so.3'
+else.
+  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3-3.dll'
+end.
+)
+
 FFTW_FORWARD=: _1
-FFTW_BACKWARD=: ione
-FFTW_ESTIMATE=: izero
-FFTW_MEASURE=: ione
+FFTW_BACKWARD=: 1
+FFTW_ESTIMATE=: 6 (33 b.) 1
+FFTW_MEASURE=: 0
 
-FFTW_VERSION=: 2.01
+FFTW_VERSION=: 3.2
 
 cd=: 15!:0
 
@@ -58,25 +59,23 @@ NB. fftw
 
 NB. =========================================================
 NB.*createplan v create a plan
-NB. y = shape ; direction; flag
+NB. y = shape ; in ; out ; direction; flag
 NB.
 NB.   direction = FFTW_FORWARD | FFTW_BACKWARD
 NB.   flag = FFTW_ESTIMATE | FFTW_MEASURE
 createplan=: 3 : 0
-'shape dir flag'=. y
+'shape in out dir flag'=. y
 assert dir e. FFTW_FORWARD,FFTW_BACKWARD
 assert flag e. FFTW_ESTIMATE, FFTW_MEASURE
-shape=. ,shape + izero
-dir=. dir + izero
-flag=. flag + izero
-cmd=. DLL,' fftwnd_create_plan + i i *i i i'
-0 pick cmd cd (#shape);shape;dir;flag
+shape=. ,shape
+cmd=. DLL,' fftw_plan_dft + x i *i *j *j i i'
+0 pick cmd cd (#shape);shape;in;out;dir;flag
 )
 
 NB. =========================================================
 NB.*destroyplan v destroy a plan
 destroyplan=: 3 : 0
-cmd=. DLL,' fftw_destroy_plan + i i'
+cmd=. DLL,' fftw_destroy_plan + n x'
 1 [ cmd cd y
 )
 
@@ -86,24 +85,23 @@ NB. x =  _1 forward
 NB.        1 backward
 NB. y =  data
 fftwnd=: 4 : 0
-assert x e. _1 1
-dir=. x + izero
-plan=. createplan ($y);dir;FFTW_ESTIMATE
-res=. fftwndone plan;dir;y
-destroyplan plan
-res
-)
-
-NB. =========================================================
-NB.*fftwndone d one call to n-dimensional FFT
-NB. y =  plan;direction;data
-fftwndone=: 3 : 0
-'plan dir data'=. y
-shp=. $data
-in=. zzero + , |: data
+shp=. $y
+if. 0 e. shp do. y return. end.
+in=. zzero + , |: y
 out=. in * 0
-cmd=. DLL,' fftwnd_one + i i *j *j'
-res=. |: (|.shp) $ > {: cmd cd plan;in;out
+assert x e. _1 1
+dir=. x
+plan=. createplan shp;in;out;dir;FFTW_ESTIMATE
+fftwexecute plan
+destroyplan plan
+res=. |: (|.shp) $ out
 if. dir=1 do. res % */shp end.
 )
 
+NB. =========================================================
+NB.*fftwexecute d one call to n-dimensional FFT
+NB. y =  plan
+fftwexecute=: 3 : 0
+cmd=. DLL,' fftw_execute + n x'
+1 [ cmd cd y
+)

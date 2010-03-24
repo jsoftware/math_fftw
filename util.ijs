@@ -5,21 +5,22 @@ NB. clean         clean numbers near 0
 NB. info          cover for wdinfo
 NB. matchclean    if clean x-y is all 0
 
-izero=: 23-23
-ione=: 23-22
-dzero=: 1.1-1.1
-done=: 2.1-1.1
 zzero=: 1j1-1j1
-zone=: 2j1-1j1
 
-DLL=: '"',~'"',jpath '~addons\math\fftw\jfftw.dll'
- 
+3 : 0''
+if. IFUNIX do.
+  DLL=: 'libfftw3.so.3'
+else.
+  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3-3.dll'
+end.
+)
+
 FFTW_FORWARD=: _1
-FFTW_BACKWARD=: ione
-FFTW_ESTIMATE=: izero
-FFTW_MEASURE=: ione
+FFTW_BACKWARD=: 1
+FFTW_ESTIMATE=: 6 (33 b.) 1
+FFTW_MEASURE=: 0
 
-FFTW_VERSION=: 2.01
+FFTW_VERSION=: 3.2
 
 cd=: 15!:0
 

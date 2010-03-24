@@ -4,7 +4,7 @@ NB. load this file with 0!:2
 NB.
 NB.   0!:2 <'\jx\addon\fftw\fftw\testfftw.ijs'
 
-load '~system\packages\fftw\fftw.ijs'
+load '~addons\math\fftw\fftw.ijs'
 
 clean=: 1e_10&$: : (4 : 0)
 if. (3!:0 y) e. 16 16384 do.
@@ -18,7 +18,11 @@ dfft=: 3 : '+/ y * ^ (#y) %~ (- o. 0j2 ) * */~ i.#y'
 matchclean=: 0: *./ . = clean @ , @: -
 round=: [ * [: <. 0.5"_ + %~
 
-A34=: j./?.1+i.2 3 4
+A34=: ". ;._2 (0 : 0)
+   0    1  1j7 2j10
+   1  0j6  4j1  5j8
+8j14 3j12 5j21 9j20
+)
 
 FFTA34=: ". ;._2 (0 : 0)
 39j99 _10j_10 10.3661j18.8301 9.3205j_6.6795
@@ -30,6 +34,7 @@ NB. =========================================================
 NB. test dat = ifftw fftw dat
 
 f=: matchclean ifftw@fftw
+f 3
 f i.8
 f i.4096
 f i.2 3 4
@@ -39,6 +44,7 @@ NB. =========================================================
 NB. test against direct calculation
 
 f=: dfft matchclean fftw
+f 3
 f i.8
 f i.132
 
@@ -52,15 +58,31 @@ b matchclean fftw a
 FFTA34 matchclean 1e_4 round fftw A34
 
 NB. =========================================================
-NB. createplan
-NB. existimate:
-P=: createplan_jfftw_ 3 4;_1;0
-FFTA34 matchclean 1e_4 round fftwndone_jfftw_ P;_1;A34
-FFTA34 matchclean 1e_4 round  -: fftwndone_jfftw_ P;_1;A34*2
+NB. createplan, performance 'measure'
+NB. In this case, must initialize input array _after_ creating plan.
+NB. Note use of in-place modification to do this, and to re-use the
+NB. plan with new input.
+in=: 12 $ 1j1            NB. Make sure elements are complex
+values.
+out=: in * 0
+P=: createplan_jfftw_ 3 4;in;out;_1;0
+in=: (,|:A34) a: } in
+fftwexecute_jfftw_ P
+FFTA34 matchclean 1e_4 round |: (4 3) $ out
+in=: (2 * in) a: } in
+fftwexecute_jfftw_ P
+FFTA34 matchclean 1e_4 round -: |: (4 3) $ out
 destroyplan_jfftw_ P
 
-NB. performance measure:
-P=: createplan_jfftw_ 3 4;_1;1
-FFTA34 matchclean 1e_4 round fftwndone_jfftw_ P;_1;A34
-FFTA34 matchclean 1e_4 round  -: fftwndone_jfftw_ P;_1;A34*2
+NB. createplan, performance 'estimate'
+NB. Again note use of in-place modification when re-using plan with
+NB. new input.
+in=: , |: A34
+out=: in * 0
+P=: createplan_jfftw_ 3 4;in;out;_1;64
+fftwexecute_jfftw_ P
+FFTA34 matchclean 1e_4 round |: (4 3) $ out
+in=: (2 * in) a: } in
+fftwexecute_jfftw_ P
+FFTA34 matchclean 1e_4 round -: |: (4 3) $ out
 destroyplan_jfftw_ P
