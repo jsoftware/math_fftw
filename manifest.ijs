@@ -25,5 +25,10 @@ philosophical-gnu-sm.jpg
 
 FILESWIN=: 0 : 0
 libfftw3-3.dll
+libfftw3-3_64.dll
+)
+
+FILESWIN64=: 0 : 0
+libfftw3-3_64.dll
 )
 

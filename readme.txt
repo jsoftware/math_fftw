@@ -9,7 +9,7 @@ parallel transforms, and can handle arbitrary array sizes efficiently.
 
 The FFTW AddOn consists of a DLL incorporating the FFTW routines, plus
 supporting J scripts and labs. The Addon is currently only available for
-Windows 9x/NT.
+Windows and Linux.
 
 FFTW was developed at MIT by Matteo Frigo and Steven G. Johnson, and a full
 description is available at the FFTW home page:

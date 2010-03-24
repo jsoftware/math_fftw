@@ -4,7 +4,7 @@ NB. load this file with 0!:2
 NB.
 NB.   0!:2 <'\jx\addon\fftw\fftw\testfftw.ijs'
 
-load '~addons\math\fftw\fftw.ijs'
+load '~Addons\math\fftw\fftw.ijs'
 
 clean=: 1e_10&$: : (4 : 0)
 if. (3!:0 y) e. 16 16384 do.

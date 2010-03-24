@@ -22,7 +22,7 @@ zzero=: 1j1-1j1
 if. IFUNIX do.
   DLL=: 'libfftw3.so.3'
 else.
-  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3-3.dll'
+  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3-3', (IF64#'_64'), '.dll'
 end.
 )
 

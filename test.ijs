@@ -3,7 +3,7 @@ buildapp_jproject_ 1
 
 cocurrent 'base'
 
-load '~addons\math\fftw\fftw.ijs'
+load '~Addons\math\fftw\fftw.ijs'
 
 DATA=: j./ (i.64) ,: (i.64) + _5 + ?. 64$10
 
