@@ -10,7 +10,7 @@ FFTW is available under Windows and Linux.
 
 VERSION=: '1.1.2'
 
-RELEASE=: 'j601 j602'
+RELEASE=: 'j601 j602 701'
 
 LABCATEGORY=: 'Math'
 
