@@ -2,9 +2,9 @@ NB. test fftw system
 NB.
 NB. load this file with 0!:2
 NB.
-NB.   0!:2 <'\jx\addon\fftw\fftw\testfftw.ijs'
+NB.   0!:2 <'/jx/addon/fftw/fftw/testfftw.ijs'
 
-load '~Addons\math\fftw\fftw.ijs'
+load '~Addons/math/fftw/fftw.ijs'
 
 clean=: 1e_10&$: : (4 : 0)
 if. (3!:0 y) e. 16 16384 do.
@@ -62,8 +62,7 @@ NB. createplan, performance 'measure'
 NB. In this case, must initialize input array _after_ creating plan.
 NB. Note use of in-place modification to do this, and to re-use the
 NB. plan with new input.
-in=: 12 $ 1j1            NB. Make sure elements are complex
-values.
+in=: 12 $ 1j1            NB. Make sure elements are complex values.
 out=: in * 0
 P=: createplan_jfftw_ 3 4;in;out;_1;0
 in=: (,|:A34) a: } in

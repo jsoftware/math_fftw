@@ -1,14 +1,10 @@
-NB. built from project: ~Addons/math/fftw/fftw
-NB. z definitions:
-
-script_z_ '~system\main\dll.ijs'
+NB. init
 
 coclass 'jfftw'
-
+NB. z definitions:
 
 fftw_z_=: (_1 & fftwnd_jfftw_) :. (1 & fftwnd_jfftw_)
 ifftw_z_=: (1 & fftwnd_jfftw_) :. (_1 & fftwnd_jfftw_)
-
 NB. fftw utils
 NB.
 NB. cd            15!:0
@@ -22,9 +18,9 @@ zzero=: 1j1-1j1
 if. UNAME-:'Linux' do.
   DLL=: 'libfftw3.so.3'
 elseif. UNAME-:'Darwin' do.
-  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3.3.dylib'
+  DLL=: '"',~'"',jpath '~addons/math/fftw/libfftw3.3.dylib'
 elseif. do.
-  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3-3', (IF64#'_64'), '.dll'
+  DLL=: '"',~'"',jpath '~addons/math/fftw/libfftw3-3', (IF64#'_64'), '.dll'
 end.
 )
 
@@ -55,8 +51,6 @@ else.
   end.
 end.
 )
-
-
 NB. fftw
 
 NB. =========================================================
@@ -107,3 +101,4 @@ fftwexecute=: 3 : 0
 cmd=. DLL,' fftw_execute + n x'
 1 [ cmd cd y
 )
+

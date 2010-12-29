@@ -16,4 +16,4 @@ description is available at the FFTW home page:
 http://theory.lcs.mit.edu/~fftw/
 
 FFTW is licensed under the GNU General Public License, see file
-system\packages\fftw\gpl.htm included with this distribution.
+~addons/math/fftw/gpl.htm included with this distribution.

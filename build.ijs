@@ -1,3 +1,3 @@
 NB. build
 
-writesourcex_jp_ '~Addons/math/fftw';'~Addons/math/fftw/fftw.ijs'
+writesource_jp_ '~Addons/math/fftw';'~Addons/math/fftw/fftw.ijs'

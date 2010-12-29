@@ -11,9 +11,9 @@ zzero=: 1j1-1j1
 if. UNAME-:'Linux' do.
   DLL=: 'libfftw3.so.3'
 elseif. UNAME-:'Darwin' do.
-  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3.3.dylib'
+  DLL=: '"',~'"',jpath '~addons/math/fftw/libfftw3.3.dylib'
 elseif. do.
-  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3-3', (IF64#'_64'), '.dll'
+  DLL=: '"',~'"',jpath '~addons/math/fftw/libfftw3-3', (IF64#'_64'), '.dll'
 end.
 )
 
