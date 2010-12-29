@@ -19,9 +19,11 @@ NB. matchclean    if clean x-y is all 0
 zzero=: 1j1-1j1
 
 3 : 0''
-if. IFUNIX do.
+if. UNAME-:'Linux' do.
   DLL=: 'libfftw3.so.3'
-else.
+elseif. UNAME-:'Darwin' do.
+  DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3.3.dylib'
+elseif. do.
   DLL=: '"',~'"',jpath '~addons\math\fftw\libfftw3-3', (IF64#'_64'), '.dll'
 end.
 )
