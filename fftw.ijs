@@ -9,7 +9,7 @@ NB. fftw utils
 NB.
 NB. cd            15!:0
 NB. clean         clean numbers near 0
-NB. info          cover for wdinfo
+NB. info          cover for sminfo
 NB. matchclean    if clean x-y is all 0
 
 zzero=: 1j1-1j1
@@ -35,7 +35,7 @@ FFTW_VERSION=: 3.2
 
 cd=: 15!:0
 
-info=: wdinfo @ ('FFTW'&;)
+info=: sminfo @ ('FFTW'&;)
 
 matchclean=: 0: *./ . = clean @ , @: -
 
