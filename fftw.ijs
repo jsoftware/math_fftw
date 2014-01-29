@@ -19,10 +19,10 @@ if. UNAME-:'Linux' do.
   DLL=: 'libfftw3.so.3'
 elseif. UNAME-:'Darwin' do.
   DLL=: '"',~'"',jpath '~addons/math/fftw/libfftw3.3.dylib'
-  if. 0=fexist DLL do. DLL=: 'libfftw3.3.dylib' end.
+  if. 0=fexist '"'-.~ DLL do. DLL=: 'libfftw3.3.dylib' end.
 elseif. UNAME-:'Win' do.
   DLL=: '"',~'"',jpath '~addons/math/fftw/libfftw3-3', (IF64#'_64'), '.dll'
-  if. 0=fexist DLL do. DLL=: 'libfftw3-3', (IF64#'_64'), '.dll' end.
+  if. 0=fexist '"'-.~ DLL do. DLL=: 'libfftw3-3', (IF64#'_64'), '.dll' end.
 elseif. do.
   DLL=: ''
 end.
