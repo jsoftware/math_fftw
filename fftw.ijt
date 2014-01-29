@@ -152,8 +152,7 @@ fftwexecute_jfftw_ P
 
 data=: j./? 1+ i.2, shape                   NB. new random data
 
-in=: (,|:data) a: } in                      NB. in-place update of input
-data
+in=: (,|:data) a: } in                      NB. in-place update of input data
 
 fftwexecute_jfftw_ P                        NB. reuse existing plan
 |: (|.shape) $ out
@@ -175,8 +174,7 @@ NB. =========================================================
 Lab Section
 )
 shape=: 2 3 4
-in=: (*/ shape) $ 1j1                       NB. input must hold complex
-values
+in=: (*/ shape) $ 1j1                       NB. input must hold complex values
 out=: in * 0
 
 [P=: createplan_jfftw_ shape;in;out;_1;0    NB. create plan
