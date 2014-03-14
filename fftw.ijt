@@ -1,6 +1,5 @@
 LABTITLE=: 'Fast Fourier Transform'
-LABWINDOWED=: 0
-LABFOCUS=: 0
+LABDEPENDS=: 'math/fftw'
 
 NB. =========================================================
 Lab Section FFTW
