@@ -8,9 +8,9 @@ FFTW (Fastest Fourier Transform in the West) is a collection of fast C routines 
 FFTW is available under Windows, Mac and Linux.
 )
 
-VERSION=: '1.1.10'
+VERSION=: '1.1.11'
 
-RELEASE=: 'j601 j602 j701 j801'
+RELEASE=: 'j802'
 
 LABCATEGORY=: 'Math'
 
