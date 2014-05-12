@@ -14,7 +14,7 @@ RELEASE=: 'j802'
 
 LABCATEGORY=: 'Math'
 
-PLATFORMS=: 'linux win darwin android'
+PLATFORMS=: ''
 
 FILES=: 0 : 0
 fftw.ijs
