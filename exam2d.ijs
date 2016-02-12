@@ -1,8 +1,8 @@
 
 
 load 'fftw numeric plot trig'
-load '~system\extras\labs\system\view2.ijs'
-load '~system\packages\math\makemat.ijs'
+load '~system/extras/labs/system/view2.ijs'
+load '~system/packages/math/makemat.ijs'
 
 0 : 0
 B=: (utmat 101) * 101 101$102 {. 0 1

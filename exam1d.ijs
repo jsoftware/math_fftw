@@ -1,8 +1,8 @@
 
 
 load 'fftw numeric plot trig'
-load '~system\extras\labs\system\view2.ijs'
-load '~system\packages\math\makemat.ijs'
+load '~system/extras/labs/system/view2.ijs'
+load '~system/packages/math/makemat.ijs'
 
 sawtooth=: 3 : 0
 X=: steps 0 5.999999 100
