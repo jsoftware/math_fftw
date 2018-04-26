@@ -10,7 +10,9 @@ FFTW is available under Windows, Mac and Linux.
 
 VERSION=: '1.1.16'
 
-RELEASE=: 'j802 j803 j804 j805 j806 j807'
+RELEASE=: ''
+
+FOLDER=: 'math/fftw'
 
 LABCATEGORY=: 'Math'
 
