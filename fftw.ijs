@@ -59,17 +59,19 @@ NB. fftw
 
 NB. =========================================================
 NB.*createplan v create a plan
-NB. y = shape ; in ; out ; direction; flag
+NB. y = shape ; p_in ; p_out ; direction; flag
 NB.
+NB.   p_in  = address of in
+NB.   p_out = address of out
 NB.   direction = FFTW_FORWARD | FFTW_BACKWARD
 NB.   flag = FFTW_ESTIMATE | FFTW_MEASURE
 createplan=: 3 : 0
-'shape in out dir flag'=. y
+'shape p_in p_out dir flag'=. y
 assert dir e. FFTW_FORWARD,FFTW_BACKWARD
 assert flag e. FFTW_ESTIMATE, FFTW_MEASURE
 shape=. ,shape
-cmd=. DLL,' fftw_plan_dft + x i *i *j *j i i'
-0 pick cmd cd (#shape);shape;in;out;dir;flag
+cmd=. DLL,' fftw_plan_dft + x i *i x x i i'
+0 pick cmd cd (#shape);shape;p_in;p_out;dir;flag
 )
 
 NB. =========================================================
@@ -91,7 +93,7 @@ in=. zzero + , |: y
 out=. in * 0
 assert x e. _1 1
 dir=. x
-plan=. createplan shp;in;out;dir;FFTW_ESTIMATE
+plan=. createplan shp;(symdat<'in');(symdat<'out');dir;FFTW_ESTIMATE
 fftwexecute plan
 destroyplan plan
 res=. |: (|.shp) $ out
