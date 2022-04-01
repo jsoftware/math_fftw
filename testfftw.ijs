@@ -64,7 +64,7 @@ NB. Note use of in-place modification to do this, and to re-use the
 NB. plan with new input.
 in=: 12 $ 1j1            NB. Make sure elements are complex values.
 out=: in * 0
-P=: createplan_jfftw_ 3 4;(symdat<'in');(symdat<'out');_1;0
+P=: createplan_jfftw_ 3 4;(15!:14<'in');(15!:14<'out');_1;0
 in=: (,|:A34) a: } in
 fftwexecute_jfftw_ P
 FFTA34 matchclean 1e_4 round |: (4 3) $ out
@@ -78,7 +78,7 @@ NB. Again note use of in-place modification when re-using plan with
 NB. new input.
 in=: , |: A34
 out=: in * 0
-P=: createplan_jfftw_ 3 4;(symdat<'in');(symdat<'out');_1;64
+P=: createplan_jfftw_ 3 4;(15!:14<'in');(15!:14<'out');_1;64
 fftwexecute_jfftw_ P
 FFTA34 matchclean 1e_4 round |: (4 3) $ out
 in=: (2 * in) a: } in

@@ -93,7 +93,7 @@ in=. zzero + , |: y
 out=. in * 0
 assert x e. _1 1
 dir=. x
-plan=. createplan shp;(symdat<'in');(symdat<'out');dir;FFTW_ESTIMATE
+plan=. createplan shp;(15!:14<'in');(15!:14<'out');dir;FFTW_ESTIMATE
 fftwexecute plan
 destroyplan plan
 res=. |: (|.shp) $ out
